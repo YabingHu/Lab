@@ -1,0 +1,109 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 16 11:17:49 2019
+
+@author: yabinghu
+"""
+from scipy.io import loadmat
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+import matplotlib.pyplot as plt 
+import scipy.io as sio
+#Training data
+CE = sio.loadmat('140000_195_250_400_650_100_100_CE.mat', verify_compressed_data_integrity=False)
+state=CE['x']#[xb,xb_dot,xf,xf_dot]
+state=np.transpose(state)
+xb=state[0]
+xb_dot=state[1]
+xf=state[2]
+xf_dot=state[3]
+kl=CE['kl']
+data_y=kl.reshape(len(kl))
+data_x=np.vstack((xb,xf,xb_dot,xf_dot)).T
+x_train=data_x
+y_train=data_y
+
+#Test data
+CE = sio.loadmat('140000_190_250_400_650_100_100_CE.mat', verify_compressed_data_integrity=False)
+state=CE['x']#[xb,xb_dot,xf,xf_dot]
+state=np.transpose(state)
+xb=state[0]
+xb_dot=state[1]
+xf=state[2]
+xf_dot=state[3]
+kl=CE['kl']
+y_test=kl.reshape(len(kl))
+x_test=np.vstack((xb,xf,xb_dot,xf_dot)).T
+
+
+#Neural Network
+m, n = x_train.shape  
+model = Sequential()
+model.add(Dense(100, input_dim=n, activation='relu',kernel_initializer='normal'))
+model.add(Dense(100, activation='relu',kernel_initializer='normal'))
+model.add(Dense(100, activation='relu',kernel_initializer='normal'))
+model.add(Dense(1,kernel_initializer='normal',activation='linear'))
+model.compile(loss='mean_squared_error',optimizer='adam',metrics=['mse'])
+res=model.fit(x_train, y_train, epochs = 10,validation_data=(x_test,y_test),batch_size=128) 
+
+plt.figure(0)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(res.history['val_mean_squared_error'],label='test error')
+plt.plot(res.history['mean_squared_error'],label=' training error')
+plt.legend(loc='best')
+plt.title('learning curve for three layer neural network')
+
+
+del x_train,y_train
+
+prediction = model.predict(x_test)
+plt.figure(1)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(prediction,label='calculated kl')
+plt.plot(y_test,label='true kl')
+plt.legend(loc='best')
+plt.title('calculated kl vs true kl for 190')
+
+
+
+
+CE = sio.loadmat('140000_185_250_400_650_100_100_CE.mat', verify_compressed_data_integrity=False)
+state=CE['x']#[xb,xb_dot,xf,xf_dot]
+state=np.transpose(state)
+xb=state[0]
+xb_dot=state[1]
+xf=state[2]
+xf_dot=state[3]
+kl=CE['kl']
+y_test=kl.reshape(len(kl))
+x_test=np.vstack((xb,xf,xb_dot,xf_dot)).T
+#prediction=model.evaluate(x_test, y_test, verbose=1)
+prediction = model.predict(x_test)
+plt.figure(2)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(prediction,label='calculated kl')
+plt.plot(y_test,label='true kl')
+plt.legend(loc='best')
+plt.title('calculated kl vs true kl for 185')
+
+
+
+CE = sio.loadmat('140000_180_250_400_650_100_100_CE.mat', verify_compressed_data_integrity=False)
+state=CE['x']#[xb,xb_dot,xf,xf_dot]
+state=np.transpose(state)
+xb=state[0]
+xb_dot=state[1]
+xf=state[2]
+xf_dot=state[3]
+kl=CE['kl']
+y_test=kl.reshape(len(kl))
+x_test=np.vstack((xb,xf,xb_dot,xf_dot)).T
+#predictions2=model.evaluate(x_test, y_test, verbose=1)
+prediction = model.predict(x_test)
+plt.figure(3)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(prediction,label='calculated kl')
+plt.plot(y_test,label='true kl')
+plt.legend(loc='best')
+plt.title('calculated kl vs true kl for 180')
