@@ -1,0 +1,243 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 23 12:55:16 2019
+
+@author: yabinghu
+"""
+
+from scipy.io import loadmat
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+import matplotlib.pyplot as plt 
+#############plot property
+#Sigma
+AD = loadmat('140000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+fig = plt.figure()
+
+plt.subplot(211)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.title(' kl and bl for 140000/1350000/1200000/90000')
+plt.plot(kl,label='kl for sigma=140000')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for sigma=140000')
+
+AD = loadmat('135000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for sigma=135000')
+plt.subplot(212)
+plt.plot(bl,label='bl for sigma=135000')
+
+AD = loadmat('120000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for sigma=120000')
+plt.subplot(212)
+plt.plot(bl,label='bl for sigma=120000')
+
+
+AD = loadmat('90000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for sigma=90000')
+plt.legend(loc='best')
+plt.subplot(212)
+plt.plot(bl,label='bl for sigma=90000')
+plt.legend(loc='best')
+#%%
+#Bg
+AD = loadmat('140000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+fig = plt.figure()
+
+plt.subplot(211)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.title(' kl and bl for 195/190/180/160/145')
+plt.plot(kl,label='kl for bg=195')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for bg=195')
+
+AD = loadmat('140000_190_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=190')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=190')
+
+AD = loadmat('140000_180_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=180')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=180')
+
+
+AD = loadmat('140000_160_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=160')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=160')
+
+
+AD = loadmat('140000_145_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=145')
+plt.legend(loc='best')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=145')
+plt.legend(loc='best')
+
+#%%
+#xb0 and xf0
+AD = loadmat('120000_172_250_400_650_50_50_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+fig = plt.figure()
+
+plt.subplot(211)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.title(' kl and bl for 150/100/130/75/50')
+plt.plot(kl,label='kl for xb0,xf0=50')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for  xb0,xf0=50')
+
+AD = loadmat('120000_172_250_400_650_75_75_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for xb0,xf0=75')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for  xb0,xf0=75')
+
+AD = loadmat('120000_172_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for xb0,xf0=100')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for  xb0,xf0=100')
+
+AD = loadmat('120000_172_250_400_650_130_130_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for xb0,xf0=130')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for  xb0,xf0=130')
+'''
+
+AD = loadmat('140000_190_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=190')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=190')
+
+AD = loadmat('140000_180_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=180')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=180')
+
+
+AD = loadmat('140000_160_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for bg=160')
+plt.subplot(212)
+plt.plot(bl,label='bl for bg=160')
+
+'''
+AD = loadmat('120000_172_250_400_650_150_150_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for  xb0,xf0=150')
+plt.legend(loc='best')
+plt.subplot(212)
+plt.plot(bl,label='bl for  xb0,xf0=150')
+plt.legend(loc='best')
+
+#%%
+AD = loadmat('140000_195_250_400_650_100_100_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+fig = plt.figure()
+
+plt.subplot(211)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.title(' kl and bl for 40000_195_250_400_650_100_100_AD.mat and 120000_172_250_400_650_150_150_AD.mat')
+plt.plot(kl,label='kl for sigma=140000_100_100')
+plt.subplot(212)
+plt.grid(color='g', linestyle='-', linewidth=0.5)
+plt.plot(bl,label='bl for sigma=140000_100_100')
+
+AD = loadmat('120000_172_250_400_650_150_150_AD.mat')
+kl=AD['kl']
+bl=AD['bl']
+kl=kl.reshape(len(kl))
+bl=bl.reshape(len(bl))
+plt.subplot(211)
+plt.plot(kl,label='kl for sigma=120000_150_150')
+plt.subplot(212)
+plt.plot(bl,label='bl for sigma=120000_150_150')
+plt.legend(loc='best')
